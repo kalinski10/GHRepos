@@ -12,7 +12,7 @@ class GRCollectionViewCell: UICollectionViewCell {
     static let reuseID = "collectoinViewCellID"
     
     let image = GRAvatarImageView(frame: .zero)
-    let title = GRTitleLabel(textAlignment: .center, fontSize: 16)
+    let title = GRTitleLabel(textAlignment: .center, fontSize: 16, textColor: .label)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

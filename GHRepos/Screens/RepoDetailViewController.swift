@@ -9,16 +9,14 @@ import UIKit
 
 class RepoDetailViewController: UIViewController {
 
-    let titleLabel          = GRTitleLabel(textAlignment: .left, fontSize: 30)
+    let titleLabel          = GRTitleLabel(textAlignment: .left, fontSize: 30, textColor: .label)
     let descriptionLabel    = GRBodyLabel()
-    
-    // container view for the items which is going to be a collection view
-    let containerView       = UIView()
-    
-    let createdAtLable      = GRSecondaryTitleLabel(fontSize: 18, textAlignment: .center)
     let readMeLabel         = UIButton()
-    
+    let containerView       = UIView() // for the child vc
+    let createdAtLable      = GRSecondaryTitleLabel(fontSize: 18, textAlignment: .center)
     let ownerCard           = OwnerCardView()
+    
+    var repo: Repo!
     
 // MARK: - Overrides & initialisers
     
@@ -31,6 +29,7 @@ class RepoDetailViewController: UIViewController {
     init(repo: Repo) {
         super.init(nibName: nil, bundle: nil)
         ownerCard.set(owner: repo.owner)
+        self.repo = repo
         titleLabel.text         = repo.name
         createdAtLable.text     = "Created on the \(repo.createdAt.convertToMonthYearFormat())"
         descriptionLabel.text   = repo.description ?? "No description to show"
@@ -50,7 +49,7 @@ class RepoDetailViewController: UIViewController {
     }
     
     @objc func readMeTapped() {
-        print("readmeTApppeeeeddd")
+        presentSafariVC(url: URL(string: repo.htmlUrl)!)
     }
 
     
@@ -61,6 +60,7 @@ class RepoDetailViewController: UIViewController {
         navigationItem.rightBarButtonItem   = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissVC))
         view.addSubviews(ownerCard, titleLabel, descriptionLabel, readMeLabel, containerView, createdAtLable)
         
+        ownerCard.delegate = self
         configureReadMe()
         configureContainerView()
         uiLayout()
@@ -128,5 +128,13 @@ class RepoDetailViewController: UIViewController {
         ])
     }
     
+    
+}
+
+
+extension RepoDetailViewController: GetProfileDelegate {
+    func buttonTapped(with url: String) {
+        presentSafariVC(url: URL(string: url)!)
+    }
     
 }

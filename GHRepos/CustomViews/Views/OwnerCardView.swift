@@ -7,13 +7,19 @@
 
 import UIKit
 
+protocol GetProfileDelegate {
+    func buttonTapped(with url: String)
+}
+
 class OwnerCardView: UIView {
     
     let imageView           = GRAvatarImageView(frame: .zero)
-    let name                = GRTitleLabel(textAlignment: .center, fontSize: 24)
+    let name                = GRTitleLabel(textAlignment: .center, fontSize: 24, textColor: .label)
     let button              = GRButton(backgroundColor: .systemYellow , title: "View Owner Profile")
     
     var getProfileUrl       = ""
+    
+    var delegate: GetProfileDelegate!
     
 // MARK: - Overrides and Initialisers
     
@@ -29,13 +35,13 @@ class OwnerCardView: UIView {
     func set(owner: User) {
         imageView.downloadImage(fromURL: owner.avatarUrl)
         name.text           = owner.login
-        getProfileUrl       = owner.url
+        getProfileUrl       = owner.htmlUrl
     }
     
 // MARK: - @objc Functions
     
     @objc func getProfileTapped() {
-     print(getProfileUrl)
+        delegate.buttonTapped(with: getProfileUrl)
     }
     
 // MARK: - private functions

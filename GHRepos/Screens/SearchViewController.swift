@@ -48,7 +48,9 @@ class SearchViewController: UIViewController {
     
     @objc func pushReposVC() {
         guard isSearchEntered else {
-            print("its emptyyy")
+            presentGFAlertOnMainThread(title: "Empty Search",
+                                       message: "Please input a repository name to start your search.",
+                                       buttonTitle: "OK")
             return
         }
 

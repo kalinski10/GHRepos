@@ -10,5 +10,5 @@ import Foundation
 struct User: Codable, Hashable {
     var login:      String
     var avatarUrl:  String
-    var url:        String
+    var htmlUrl:        String
 }

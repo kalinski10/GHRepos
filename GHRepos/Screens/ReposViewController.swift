@@ -20,6 +20,8 @@ class ReposViewController: GRDataLoadingViewController {
 
     var collectionView:         UICollectionView!
     var dataSource:             UICollectionViewDiffableDataSource<Section, Repo>!
+    
+    var emptyStateContainerView = UIView()
 
     
 // MARK: - Overrides & initialisers
@@ -64,22 +66,15 @@ class ReposViewController: GRDataLoadingViewController {
                 self.updateUI(with: repos)
                 
             case .failure(let error):
-                print(error.rawValue)
+                self.presentGFAlertOnMainThread(title: "Oops.",
+                                                message: error.rawValue,
+                                                buttonTitle: "OK")
             }
             self.isLoadingMoreRepos = false
         }
     }
     
 //MARK: - CollectionView configureations
-    
-    private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Repo>(collectionView: collectionView, cellProvider: { collectionView, indexPath, error -> UICollectionViewCell? in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GRCollectionViewCell.reuseID, for: indexPath) as! GRCollectionViewCell
-            cell.set(repo: self.repos[indexPath.row])
-            return cell
-        })
-    }
-    
     
     private func updateData(on repos: [Repo]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Repo>()
@@ -96,18 +91,24 @@ class ReposViewController: GRDataLoadingViewController {
         self.repos.append(contentsOf: repos)
         
         if self.repos.isEmpty {
-            let message = "This User doesnt have any followers. Go follow them!"
-            print(message)
-//            DispatchQueue.main.async { self.showEmptyStateView(with: message, in: self.view) }
+            configureEmptyStateViewOnMainThread()
             return
         }
-        
+        DispatchQueue.main.async {
+            self.emptyStateContainerView.removeFromSuperview()
+        }
         self.updateData(on: self.repos)
     }
     
-
     
-// MARK: - UIConfigurations
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, Repo>(collectionView: collectionView, cellProvider: { collectionView, indexPath, error -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GRCollectionViewCell.reuseID, for: indexPath) as! GRCollectionViewCell
+            cell.set(repo: self.repos[indexPath.row])
+            return cell
+        })
+    }
+    
     
     private func configureCollectionView() {
         collectionView                  = UICollectionView(frame: view.bounds, collectionViewLayout: UIHelper.configureThreeColumnCompositionlalayout())
@@ -116,6 +117,9 @@ class ReposViewController: GRDataLoadingViewController {
         collectionView.register(GRCollectionViewCell.self, forCellWithReuseIdentifier: GRCollectionViewCell.reuseID)
         view.addSubview(collectionView)
     }
+
+    
+// MARK: - UIConfigurations
     
     private func configureSearchController() {
         let searchController = UISearchController()
@@ -125,6 +129,14 @@ class ReposViewController: GRDataLoadingViewController {
         navigationItem.searchController                         = searchController
     }
     
+    
+    private func configureEmptyStateViewOnMainThread() {
+        DispatchQueue.main.async {
+            self.emptyStateContainerView.frame = self.view.bounds
+            self.view.addSubview(self.emptyStateContainerView)
+            self.showEmptyStateView(with: "Could not find any repositories with your current search. Go back and try again", in: self.emptyStateContainerView)
+        }
+    }
 }
 
 
@@ -145,7 +157,7 @@ extension ReposViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        present(UINavigationController(rootViewController: RepoDetailViewController(repo: repos[indexPath.row])), animated: true)        
+        present(UINavigationController(rootViewController: RepoDetailViewController(repo: repos[indexPath.row])), animated: true)
     }
 }
 

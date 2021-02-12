@@ -11,7 +11,7 @@ class GRElementCollectionViewCell: UICollectionViewCell {
     
     static let reuseID = "ElementCellID"
     
-    var titleLabel  = GRTitleLabel(textAlignment: .left, fontSize: 22)
+    var titleLabel  = GRTitleLabel(textAlignment: .left, fontSize: 22, textColor: .label)
     var imageView   = UIImageView()
     var countLabel  = GRBodyLabel()
     

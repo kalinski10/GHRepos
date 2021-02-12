@@ -20,18 +20,19 @@ class GRTitleLabel: UILabel {
     }
     
     
-    convenience init(textAlignment: NSTextAlignment, fontSize: CGFloat) {
+    convenience init(textAlignment: NSTextAlignment, fontSize: CGFloat, textColor: UIColor) {
         self.init(frame: .zero)
+        self.textColor      = textColor
         self.textAlignment  = textAlignment
         self.font           = UIFont.systemFont(ofSize: fontSize, weight: .bold)
     }
     
     
     private func configure() {
-        textColor                   = .label
         adjustsFontSizeToFitWidth   = true
         minimumScaleFactor          = 0.9
         lineBreakMode               = .byTruncatingTail
+        numberOfLines               = 0
         translatesAutoresizingMaskIntoConstraints = false
     }
 }

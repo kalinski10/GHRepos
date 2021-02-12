@@ -12,7 +12,7 @@ class GRAlertViewController: UIViewController {
     // MARK: - Constants
         
         let containerView       = GRAlertContainerView()
-        let titleLabel          = GRTitleLabel(textAlignment: .center, fontSize: 20)
+        let titleLabel          = GRTitleLabel(textAlignment: .center, fontSize: 20, textColor: .label)
         let messageLabel        = GRBodyLabel(textAlignment: .center)
         let actionButton        = GRButton(backgroundColor: .systemYellow, title: "OK")
         
