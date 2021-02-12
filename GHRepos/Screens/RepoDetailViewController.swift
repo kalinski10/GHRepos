@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RepoDetailViewController: UIViewController {
+final class RepoDetailViewController: UIViewController {
 
     let titleLabel          = GRTitleLabel(textAlignment: .left, fontSize: 30, textColor: .label)
     let descriptionLabel    = GRBodyLabel()
@@ -32,7 +32,7 @@ class RepoDetailViewController: UIViewController {
         self.repo = repo
         titleLabel.text         = repo.name
         createdAtLable.text     = "Created on the \(repo.createdAt.convertToMonthYearFormat())"
-        descriptionLabel.text   = repo.description ?? "No description to show"
+        descriptionLabel.text   = repo.description ?? Constants.Strings.Messages.noDescription
         add(childVC: GRRepoElementsViewController(repo: repo), to: containerView)
     }
     
@@ -75,7 +75,7 @@ class RepoDetailViewController: UIViewController {
     
 
     private func configureReadMe() {
-        readMeLabel.setTitle("Click here to view README", for: .normal)
+        readMeLabel.setTitle(Constants.Strings.Title.clickReadMe, for: .normal)
         readMeLabel.setTitleColor(.systemYellow, for: .normal)
         readMeLabel.titleLabel?.font            = UIFont.systemFont(ofSize: 14)
         readMeLabel.titleLabel?.textAlignment   = .left
@@ -131,10 +131,10 @@ class RepoDetailViewController: UIViewController {
     
 }
 
+// MARK: - Extensions
 
 extension RepoDetailViewController: GetProfileDelegate {
     func buttonTapped(with url: String) {
         presentSafariVC(url: URL(string: url)!)
     }
-    
 }

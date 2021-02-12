@@ -14,7 +14,7 @@ class GRAlertViewController: UIViewController {
         let containerView       = GRAlertContainerView()
         let titleLabel          = GRTitleLabel(textAlignment: .center, fontSize: 20, textColor: .label)
         let messageLabel        = GRBodyLabel(textAlignment: .center)
-        let actionButton        = GRButton(backgroundColor: .systemYellow, title: "OK")
+        let actionButton        = GRButton(backgroundColor: .systemYellow, title: Constants.Strings.Title.ok)
         
         let padding: CGFloat    = 20
 
@@ -58,7 +58,7 @@ class GRAlertViewController: UIViewController {
         
     // MARK: - Layout Configureations
         
-        func configureContainerView() {
+        private func configureContainerView() {
             view.addSubview(containerView)
             
             NSLayoutConstraint.activate([
@@ -70,8 +70,8 @@ class GRAlertViewController: UIViewController {
         }
         
         
-        func configureMessageLabel() {
-            titleLabel.text = alertTitle ?? "something went wrong" // this is called nil coalescing and its another way of unwrapping optionals
+        private func configureMessageLabel() {
+            titleLabel.text = alertTitle ?? Constants.Strings.Title.somethingsWrong
             
             NSLayoutConstraint.activate([
                 titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: padding),
@@ -82,8 +82,8 @@ class GRAlertViewController: UIViewController {
         }
         
         
-        func configureActionButton() {
-            actionButton.setTitle(buttonTitle ?? "OK", for: .normal)
+        private func configureActionButton() {
+            actionButton.setTitle(buttonTitle ?? Constants.Strings.Title.ok, for: .normal)
             actionButton.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
             
             NSLayoutConstraint.activate([
@@ -95,8 +95,8 @@ class GRAlertViewController: UIViewController {
         }
         
         
-        func configureBodyLabel() {
-            messageLabel.text = message ?? "unable to comlete request"
+        private func configureBodyLabel() {
+            messageLabel.text = message ?? Constants.Strings.Title.unableToCompleteRequest
             messageLabel.numberOfLines = 4
             
             NSLayoutConstraint.activate([

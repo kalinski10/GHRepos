@@ -23,5 +23,4 @@ struct Repo: Codable, Hashable {
     let forksCount:         Int
     let openIssuesCount:    Int
     let score:              Int
-//    let subscribersCount:   Int
 }

@@ -32,6 +32,7 @@
 		4C4B8DE425D5797400FC0BCA /* GRDataLoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B8DE325D5797400FC0BCA /* GRDataLoadingViewController.swift */; };
 		4C4B8DEC25D58BA100FC0BCA /* RepoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C4B8DEB25D58BA100FC0BCA /* RepoDetailViewController.swift */; };
 		4CADFFBB25D69B9E00F66BB6 /* GREmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CADFFBA25D69B9E00F66BB6 /* GREmptyStateView.swift */; };
+		4CADFFF325D6C18900F66BB6 /* DataControllerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CADFFF225D6C18900F66BB6 /* DataControllerManager.swift */; };
 		4CC97D2125D5985800FE8710 /* OwnerCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC97D2025D5985800FE8710 /* OwnerCardView.swift */; };
 		4CC97D3725D5B13200FE8710 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC97D3625D5B13200FE8710 /* Date+Ext.swift */; };
 		4CC97D3F25D5B3F800FE8710 /* GRSecondaryTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC97D3E25D5B3F800FE8710 /* GRSecondaryTitleLabel.swift */; };
@@ -41,6 +42,7 @@
 		4CC97D5B25D5FA7300FE8710 /* GRAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC97D5A25D5FA7300FE8710 /* GRAlertViewController.swift */; };
 		4CC97D6025D5FAC000FE8710 /* GRAlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC97D5F25D5FAC000FE8710 /* GRAlertContainerView.swift */; };
 		4CC97D6525D5FAF700FE8710 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC97D6425D5FAF700FE8710 /* UIViewController+Ext.swift */; };
+		4CD1612525D6D82E0008B0B6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD1612425D6D82E0008B0B6 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,7 @@
 		4C4B8DE325D5797400FC0BCA /* GRDataLoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRDataLoadingViewController.swift; sourceTree = "<group>"; };
 		4C4B8DEB25D58BA100FC0BCA /* RepoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailViewController.swift; sourceTree = "<group>"; };
 		4CADFFBA25D69B9E00F66BB6 /* GREmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GREmptyStateView.swift; sourceTree = "<group>"; };
+		4CADFFF225D6C18900F66BB6 /* DataControllerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataControllerManager.swift; sourceTree = "<group>"; };
 		4CC97D2025D5985800FE8710 /* OwnerCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerCardView.swift; sourceTree = "<group>"; };
 		4CC97D3625D5B13200FE8710 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		4CC97D3E25D5B3F800FE8710 /* GRSecondaryTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRSecondaryTitleLabel.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		4CC97D5A25D5FA7300FE8710 /* GRAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRAlertViewController.swift; sourceTree = "<group>"; };
 		4CC97D5F25D5FAC000FE8710 /* GRAlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GRAlertContainerView.swift; sourceTree = "<group>"; };
 		4CC97D6425D5FAF700FE8710 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
+		4CD1612425D6D82E0008B0B6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -249,6 +253,7 @@
 			children = (
 				4C4B8D9025D4639E00FC0BCA /* UIHelper.swift */,
 				4C4B8DAD25D46BD200FC0BCA /* GRError.swift */,
+				4CD1612325D6D81D0008B0B6 /* Constants */,
 				4C4B8D8F25D45FAB00FC0BCA /* Managers */,
 				4C4B8D7725D4486400FC0BCA /* Extensions */,
 			);
@@ -259,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				4C4B8DA525D46AE900FC0BCA /* NetworkManager.swift */,
+				4CADFFF225D6C18900F66BB6 /* DataControllerManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -324,6 +330,14 @@
 				4CADFFBA25D69B9E00F66BB6 /* GREmptyStateView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		4CD1612325D6D81D0008B0B6 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4CD1612425D6D82E0008B0B6 /* Constants.swift */,
+			);
+			path = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,6 +476,7 @@
 				4C4B8D6025D4336000FC0BCA /* SearchViewController.swift in Sources */,
 				4CC97D2125D5985800FE8710 /* OwnerCardView.swift in Sources */,
 				4C4B8D2725D4317E00FC0BCA /* GHRepos.xcdatamodeld in Sources */,
+				4CD1612525D6D82E0008B0B6 /* Constants.swift in Sources */,
 				4CC97D3F25D5B3F800FE8710 /* GRSecondaryTitleLabel.swift in Sources */,
 				4CC97D5125D5D18A00FE8710 /* GRRepoElementsViewController.swift in Sources */,
 				4C4B8D7925D448AA00FC0BCA /* UIView+Ext.swift in Sources */,
@@ -485,6 +500,7 @@
 				4C4B8D9B25D4647B00FC0BCA /* User.swift in Sources */,
 				4CC97D6525D5FAF700FE8710 /* UIViewController+Ext.swift in Sources */,
 				4C4B8DB625D470B500FC0BCA /* GRCollectionViewCell.swift in Sources */,
+				4CADFFF325D6C18900F66BB6 /* DataControllerManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

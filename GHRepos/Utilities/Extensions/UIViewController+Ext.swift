@@ -16,7 +16,7 @@ extension UIViewController {
         view.addSubview(emptyStateView)
     }
     
-    func presentGFAlertOnMainThread(title: String, message: String, buttonTitle: String) {
+    func presentGRAlertOnMainThread(title: String, message: String, buttonTitle: String) {
         DispatchQueue.main.async {
             let alertVC                     = GRAlertViewController(title: title, message: message, buttonTitle: buttonTitle)
             alertVC.modalPresentationStyle  = .overFullScreen

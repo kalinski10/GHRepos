@@ -10,7 +10,7 @@ import UIKit
 class GRAvatarImageView: UIImageView {
     
     let cache            = NetworkManager.shared.cache
-    let placeholderImage = UIImage(named: "avatar-placeholder")
+    let placeholderImage = Constants.Images.avatarPlaceHolderImage
     
     
     override init(frame: CGRect) {
@@ -26,7 +26,7 @@ class GRAvatarImageView: UIImageView {
     
     private func configure() {
         layer.cornerRadius  = 10
-        clipsToBounds       = true // to fill in the image view so that the image can have the corner radius
+        clipsToBounds       = true
         image               = placeholderImage
         translatesAutoresizingMaskIntoConstraints = false
     }

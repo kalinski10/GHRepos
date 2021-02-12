@@ -7,11 +7,12 @@
 
 import UIKit
 
-class ReposViewController: GRDataLoadingViewController {
+final class ReposViewController: GRDataLoadingViewController {
     
     var repos:          [Repo]  = []
     var filteredRepos:  [Repo]  = []
     var search:         String!
+    var searches:       [RepoSearches] = []
     
     var page                    = 1
     var isSearching             = false
@@ -30,14 +31,52 @@ class ReposViewController: GRDataLoadingViewController {
         configure()
     }
     
+    
     init(search: String) {
         super.init(nibName: nil, bundle: nil)
         self.search = search
         title = "Results for '\(search)'"
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+// MARK: - @objc functions
+    
+    @objc func addButtonTapped() {
+        fetchSearches()
+        
+        for search in searches {
+            if search.searchUrl == self.search {
+                presentGRAlertOnMainThread(title: Constants.Strings.Title.alreadyFaved,
+                                           message: Constants.Strings.Messages.alreadyFaved,
+                                           buttonTitle: Constants.Strings.Title.ok)
+                return
+            }
+        }
+        
+        let favouriteSearch = RepoSearches(context: DataControllerManager.shared.context)
+        favouriteSearch.searchUrl = search
+        DataControllerManager.shared.saveSearches()
+        
+        presentGRAlertOnMainThread(title: Constants.Strings.Title.faved,
+                                   message: Constants.Strings.Messages.faved,
+                                   buttonTitle: Constants.Strings.Title.ok)
+    }
+    
+    
+    private func fetchSearches() {
+        DataControllerManager.shared.fetchSearches { result in
+            switch result {
+            case .success(let searches):
+                self.searches = searches
+                
+            case .failure(let error):
+                print(error.rawValue)
+            }
+        }
     }
     
     
@@ -45,13 +84,18 @@ class ReposViewController: GRDataLoadingViewController {
     
     private func configure() {
         navigationController?.setNavigationBarHidden(false, animated: true)
-        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.prefersLargeTitles  = true
+        navigationController?.navigationBar.tintColor           = .systemYellow
+        
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonTapped))
+        navigationItem.rightBarButtonItem = addButton
         
         configureCollectionView()
         configureDataSource()
         configureSearchController()
         getRepos(search: search, page: page)
     }
+    
     
     private func getRepos(search: String, page: Int) {
         showLoadingView()
@@ -66,9 +110,9 @@ class ReposViewController: GRDataLoadingViewController {
                 self.updateUI(with: repos)
                 
             case .failure(let error):
-                self.presentGFAlertOnMainThread(title: "Oops.",
+                self.presentGRAlertOnMainThread(title: Constants.Strings.Title.oops,
                                                 message: error.rawValue,
-                                                buttonTitle: "OK")
+                                                buttonTitle: Constants.Strings.Title.ok)
             }
             self.isLoadingMoreRepos = false
         }
@@ -86,7 +130,8 @@ class ReposViewController: GRDataLoadingViewController {
         }
     }
     
-    func updateUI(with repos: [Repo]) {
+    
+    private func updateUI(with repos: [Repo]) {
         if repos.count < 20 { self.hasMoreRepos = false } // checks of there are more followers in order to know if we can make anoether network call
         self.repos.append(contentsOf: repos)
         
@@ -124,7 +169,7 @@ class ReposViewController: GRDataLoadingViewController {
     private func configureSearchController() {
         let searchController = UISearchController()
         searchController.searchResultsUpdater                   = self
-        searchController.searchBar.placeholder                  = "Search For Repository"
+        searchController.searchBar.placeholder                  = Constants.Strings.Title.searchRepos
         searchController.obscuresBackgroundDuringPresentation   = false
         navigationItem.searchController                         = searchController
     }
@@ -134,7 +179,7 @@ class ReposViewController: GRDataLoadingViewController {
         DispatchQueue.main.async {
             self.emptyStateContainerView.frame = self.view.bounds
             self.view.addSubview(self.emptyStateContainerView)
-            self.showEmptyStateView(with: "Could not find any repositories with your current search. Go back and try again", in: self.emptyStateContainerView)
+            self.showEmptyStateView(with: Constants.Strings.Messages.emptyRepo, in: self.emptyStateContainerView)
         }
     }
 }

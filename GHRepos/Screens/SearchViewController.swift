@@ -7,16 +7,17 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     
-    var image           = UIImageView()
-    var textField       = GRTextField()
-    var searchButton    = GRButton(backgroundColor: .systemYellow, title: "Search")
+    let image           = UIImageView()
+    let textField       = GRTextField()
+    let searchButton    = GRButton(backgroundColor: .systemYellow, title: Constants.Strings.Title.search)
     
     var isSearchEntered: Bool { return !textField.text!.isEmpty }
     
     
 // MARK: - Overrides
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
@@ -38,6 +39,7 @@ class SearchViewController: UIViewController {
         keyeboardDissmiser()
     }
     
+    
     private func keyeboardDissmiser() {
         let tap = UITapGestureRecognizer(target: view, action: #selector(view.endEditing))
         view.addGestureRecognizer(tap)
@@ -48,9 +50,9 @@ class SearchViewController: UIViewController {
     
     @objc func pushReposVC() {
         guard isSearchEntered else {
-            presentGFAlertOnMainThread(title: "Empty Search",
-                                       message: "Please input a repository name to start your search.",
-                                       buttonTitle: "OK")
+            presentGRAlertOnMainThread(title: Constants.Strings.Title.emptySearch,
+                                       message: Constants.Strings.Messages.inputRepo,
+                                       buttonTitle: Constants.Strings.Title.ok)
             return
         }
 
@@ -61,8 +63,8 @@ class SearchViewController: UIViewController {
     
 // MARK: - UIConfigureations
     
-    func configureImage() {
-        image.image = UIImage(named: "gh-logo")
+    private func configureImage() {
+        image.image = Constants.Images.ghLogo
         image.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             image.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -120),
@@ -73,7 +75,7 @@ class SearchViewController: UIViewController {
     }
     
     
-    func configureTextField() {
+    private func configureTextField() {
         textField.delegate = self
         NSLayoutConstraint.activate([
             textField.centerXAnchor.constraint(equalTo: image.centerXAnchor),
@@ -83,7 +85,8 @@ class SearchViewController: UIViewController {
         ])
     }
     
-    func configureButton() {
+    
+    private func configureButton() {
         searchButton.addTarget(self, action: #selector(pushReposVC), for: .touchUpInside)
         NSLayoutConstraint.activate([
             searchButton.leadingAnchor.constraint(equalTo: textField.leadingAnchor),

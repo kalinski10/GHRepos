@@ -35,7 +35,7 @@ class GRTextField: UITextField {
         minimumFontSize             = 12
         
         clearButtonMode             = .whileEditing
-        placeholder                 = "Search Repositories"
+        placeholder                 = Constants.Strings.Title.searchRepos
         backgroundColor             = .tertiarySystemBackground
         autocorrectionType          = .no
         keyboardType                = .default

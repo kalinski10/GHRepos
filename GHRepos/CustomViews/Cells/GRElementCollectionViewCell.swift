@@ -32,34 +32,34 @@ class GRElementCollectionViewCell: UICollectionViewCell {
     func set(repo: Repo, indexPath: Int) {
         switch indexPath {
         case 0:
-            titleLabel.text = "Language:"
-            imageView.image = UIImage(systemName: "captions.bubble.fill")
+            titleLabel.text = Constants.Strings.ElementTitles.language
+            imageView.image = Constants.Images.ElementImages.language
             countLabel.text = repo.language
             
         case 1:
-            titleLabel.text = "Score:"
-            imageView.image = UIImage(systemName: "star.fill")
+            titleLabel.text = Constants.Strings.ElementTitles.score
+            imageView.image = Constants.Images.ElementImages.score
             countLabel.text = "\(repo.score)"
             
         case 2:
-            titleLabel.text = "Forks:"
-            imageView.image = UIImage(systemName: "tuningfork")
+            titleLabel.text = Constants.Strings.ElementTitles.forks
+            imageView.image = Constants.Images.ElementImages.forks
             countLabel.text = "\(repo.forksCount)"
             
         case 3:
-            titleLabel.text = "Issues:"
-            imageView.image = UIImage(systemName: "staroflife.fill")
+            titleLabel.text = Constants.Strings.ElementTitles.issues
+            imageView.image = Constants.Images.ElementImages.issues
             countLabel.text = "\(repo.openIssuesCount)"
             
         case 4:
-            titleLabel.text = "Watchers:"
-            imageView.image = UIImage(systemName: "eye.fill")
+            titleLabel.text = Constants.Strings.ElementTitles.watchers
+            imageView.image = Constants.Images.ElementImages.watchers
             countLabel.text = "\(repo.watchersCount)"
             
         default:
-            titleLabel.text = "Oops:"
+            titleLabel.text = Constants.Strings.Title.oops
             imageView.image = UIImage(systemName: "")
-            countLabel.text = "something went wrong"
+            countLabel.text = Constants.Strings.Title.somethingsWrong
         }
     }
     

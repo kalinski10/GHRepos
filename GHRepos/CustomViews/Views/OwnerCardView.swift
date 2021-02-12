@@ -15,7 +15,7 @@ class OwnerCardView: UIView {
     
     let imageView           = GRAvatarImageView(frame: .zero)
     let name                = GRTitleLabel(textAlignment: .center, fontSize: 24, textColor: .label)
-    let button              = GRButton(backgroundColor: .systemYellow , title: "View Owner Profile")
+    let button              = GRButton(backgroundColor: .systemYellow , title: Constants.Strings.Title.viewOwnerProfile)
     
     var getProfileUrl       = ""
     

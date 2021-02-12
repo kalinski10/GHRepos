@@ -19,14 +19,14 @@ final class GRTabbarController: UITabBarController {
     
     func searchNC() -> UINavigationController {
         let searchVC            = SearchViewController()
-        searchVC.title          = "Search"
+        searchVC.title          = Constants.Strings.Title.search
         searchVC.tabBarItem     = UITabBarItem(tabBarSystemItem: .search, tag: 0)
         return UINavigationController(rootViewController: searchVC)
     }
     
     func favouritesNC() -> UINavigationController {
         let favouritesVC        = FavouritesViewController()
-        favouritesVC.title      = "Favourites"
+        favouritesVC.title      = Constants.Strings.Title.faveSearches
         favouritesVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
         return UINavigationController(rootViewController: favouritesVC)
     }

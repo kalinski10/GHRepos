@@ -22,8 +22,8 @@ class GRSecondaryTitleLabel: UILabel {
     
     convenience init(fontSize: CGFloat, textAlignment: NSTextAlignment) {
         self.init(frame: .zero)
-        font = UIFont.systemFont(ofSize: fontSize, weight: .medium)
-        self.textAlignment = textAlignment
+        font                = UIFont.systemFont(ofSize: fontSize, weight: .medium)
+        self.textAlignment  = textAlignment
     }
     
     

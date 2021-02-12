@@ -9,7 +9,7 @@ import UIKit
 
 class GREmptyStateView: UIView {
     
-    var title               = GRTitleLabel(textAlignment: .center, fontSize: 30, textColor: .systemGray2)
+    let title               = GRTitleLabel(textAlignment: .center, fontSize: 30, textColor: .systemGray2)
     let imageView           = UIImageView()
     let padding: CGFloat    = 20
     
@@ -29,11 +29,11 @@ class GREmptyStateView: UIView {
     }
     
     
-    func configureVIew() {
+    private func configureVIew() {
         addSubviews(title, imageView)
         backgroundColor     = .systemBackground
         
-        imageView.image     = UIImage(named: "empty-state")
+        imageView.image     = Constants.Images.emptyStateImage
         imageView.tintColor = .systemGray2
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
